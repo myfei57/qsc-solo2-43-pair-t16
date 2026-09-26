@@ -23,6 +23,14 @@ class RecordFilter:
             return False
         if self.target and record.target != self.target:
             return False
+        if self.min_generation >= 0 and record.generation < self.min_generation:
+            return False
+        if self.max_generation >= 0 and record.generation > self.max_generation:
+            return False
+        if self.since_tick >= 0 and record.tick < self.since_tick:
+            return False
+        if self.until_tick >= 0 and record.tick > self.until_tick:
+            return False
         return True
 
     def apply(self, records: Iterable) -> List:
